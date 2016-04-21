@@ -1,0 +1,40 @@
+From 241783e3212701c9f724b7922a897d299aa22f59 Mon Sep 17 00:00:00 2001
+From: Mathias Lafeldt <mathias.lafeldt@gmail.com>
+Date: Thu, 21 Apr 2016 22:17:57 +0200
+Subject: [PATCH] Disable all monkeys except for Chaos Monkey
+
+---
+ .../java/com/netflix/simianarmy/basic/BasicMonkeyServer.java   | 10 ----------
+ 1 file changed, 10 deletions(-)
+
+diff --git a/src/main/java/com/netflix/simianarmy/basic/BasicMonkeyServer.java b/src/main/java/com/netflix/simianarmy/basic/BasicMonkeyServer.java
+index dd7856d..8cad092 100644
+--- a/src/main/java/com/netflix/simianarmy/basic/BasicMonkeyServer.java
++++ b/src/main/java/com/netflix/simianarmy/basic/BasicMonkeyServer.java
+@@ -51,12 +51,6 @@ public class BasicMonkeyServer extends HttpServlet {
+     public void addMonkeysToRun() {
+         LOGGER.info("Adding Chaos Monkey.");
+         RUNNER.replaceMonkey(this.chaosClass, this.chaosContextClass);
+-        LOGGER.info("Adding Volume Tagging Monkey.");
+-        RUNNER.replaceMonkey(VolumeTaggingMonkey.class, BasicVolumeTaggingMonkeyContext.class);
+-        LOGGER.info("Adding Janitor Monkey.");
+-        RUNNER.replaceMonkey(BasicJanitorMonkey.class, BasicJanitorMonkeyContext.class);
+-        LOGGER.info("Adding Conformity Monkey.");
+-        RUNNER.replaceMonkey(BasicConformityMonkey.class, BasicConformityMonkeyContext.class);
+     }
+ 
+     /**
+@@ -147,10 +141,6 @@ public class BasicMonkeyServer extends HttpServlet {
+         RUNNER.stop();
+         LOGGER.info("Stopping Chaos Monkey.");
+         RUNNER.removeMonkey(this.chaosClass);
+-        LOGGER.info("Stopping volume tagging Monkey.");
+-        RUNNER.removeMonkey(VolumeTaggingMonkey.class);
+-        LOGGER.info("Stopping Janitor Monkey.");
+-        RUNNER.removeMonkey(BasicJanitorMonkey.class);
+         super.destroy();
+     }
+ }
+-- 
+2.8.1
+

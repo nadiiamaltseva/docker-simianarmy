@@ -3,9 +3,11 @@ FROM java:8
 MAINTAINER Mathias Lafeldt <mathias.lafeldt@gmail.com>
 
 ENV SIMIANARMY_VERSION master
+COPY patches/ /patches
 WORKDIR /simianarmy
 RUN git clone git://github.com/Netflix/SimianArmy.git . \
     && git checkout -qf $SIMIANARMY_VERSION \
+    && git apply -v /patches/* \
     && ./gradlew build
 
 ENV CONFD_VERSION 0.12.0-alpha3

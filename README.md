@@ -1,4 +1,4 @@
-# The Simian Army - Docker Edition
+# Chaos Monkey - Docker Edition
 
 This project provides a highly configurable Docker image of the Simian Army as a sound basis for automating [chaos experiments](https://medium.com/production-ready/chaos-engineering-101-1103059fae44).
 
@@ -143,18 +143,6 @@ See https://github.com/Netflix/SimianArmy/wiki/Global-Settings for a detailed de
 | /simianarmy/chaos/notification/receiveremail | |
 
 See https://github.com/Netflix/SimianArmy/wiki/Chaos-Settings for a detailed description of the properties. Also, consult https://github.com/Netflix/SimianArmy/wiki/The-Chaos-Monkey-Army to learn more about the different Chaos Monkey strategies.
-
-### Janitor Monkey Properties
-
-Janitor Monkey is disabled and cannot be configured at the moment.
-
-### Conformity Monkey Properties
-
-Conformity Monkey is disabled and cannot be configured at the moment.
-
-### VolumeTagging Monkey Properties
-
-VolumeTagging Monkey is disabled and cannot be configured at the moment.
 
 ## Author
 
