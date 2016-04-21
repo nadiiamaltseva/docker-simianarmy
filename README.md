@@ -1,23 +1,23 @@
 # Chaos Monkey - Docker Edition
 
-This project provides a highly configurable Docker image of the Simian Army as a sound basis for automating [chaos experiments](https://medium.com/production-ready/chaos-engineering-101-1103059fae44).
+This project provides a highly configurable Docker image of Chaos Monkey as a sound basis for automating [chaos experiments](https://medium.com/production-ready/chaos-engineering-101-1103059fae44).
 
-> The Simian Army is a suite of tools for keeping your cloud operating in top form. Chaos Monkey, the first member, is a resiliency tool that helps ensure that your applications can tolerate random instance failures
+Chaos Monkey is the most famous member of Netflix's [Simian Army](https://github.com/Netflix/SimianArmy).
 
 ## Usage
 
-This will start a Docker container running the Simian Army:
+This will start a Docker container running Chaos Monkey:
 
 ```bash
-docker pull mlafeldt/simianarmy
-docker run -it --rm [-e CONFD_OPTS="..."] mlafeldt/simianarmy
+docker pull mlafeldt/chaosmonkey
+docker run -it --rm [-e CONFD_OPTS="..."] mlafeldt/chaosmonkey
 ```
 
-See next section on how to configure the Simian Army.
+See next section on how to configure Chaos Monkey.
 
 ## Configuration
 
-The Simian Army is a Java application that reads [its configuration](https://github.com/Netflix/SimianArmy/wiki/Configuration) from `*.properties` files. The Docker container will update those configuration files dynamically at startup via [confd](https://github.com/kelseyhightower/confd).
+Chaos Monkey is a Java application that reads [its configuration](https://github.com/Netflix/SimianArmy/wiki/Configuration) from `*.properties` files. The Docker container will update those configuration files dynamically at startup via [confd](https://github.com/kelseyhightower/confd).
 
 confd can fetch configuration data from different key-value stores such as etcd or Vault, or environment variables passed to the container via `-e` (the default behavior). For this abstraction to work, the following mapping is used:
 
@@ -29,7 +29,7 @@ confd can fetch configuration data from different key-value stores such as etcd 
 
 ### Via Environment Variables
 
-That being said, here is how to configure the Simian Army via environment variables:
+That being said, here is how to configure Chaos Monkey via environment variables:
 
 ```bash
 docker run -it --rm \
@@ -37,7 +37,7 @@ docker run -it --rm \
     -e SIMIANARMY_CLIENT_AWS_SECRETKEY=$AWS_SECRET_ACCESS_KEY \
     -e SIMIANARMY_CLIENT_AWS_REGION=$AWS_REGION \
     -e SIMIANARMY_CALENDAR_ISMONKEYTIME=true \
-    mlafeldt/simianarmy
+    mlafeldt/chaosmonkey
 ```
 
 Note: This example is safe to run as Chaos Monkey will operate in dry-run mode
@@ -58,7 +58,7 @@ etcdctl set /simianarmy/calendar/ismonkeytime true
 # Start container using data in etcd
 docker run -it --rm \
     -e CONFD_OPTS="-backend=etcd -node=$ETCDCTL_ENDPOINT" \
-    mlafeldt/simianarmy
+    mlafeldt/chaosmonkey
 ```
 
 As this example shows, you can set `CONFD_OPTS` to pass [any available option](https://github.com/kelseyhightower/confd/blob/master/docs/command-line-flags.md) to confd to switch backends, change the log level, etc.
